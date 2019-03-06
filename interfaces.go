@@ -14,4 +14,5 @@ func main() {
     g := great()
     g.hello()
     fmt.Println("done")
+    fmt.Println("done")
 }
