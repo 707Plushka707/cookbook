@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 type great interface {
-    hello() string
+    hello()
 }
 
 func (g great) hello() {
@@ -14,5 +14,6 @@ func main() {
     g := great()
     g.hello()
     fmt.Println("done")
-    fmt.Println("done")
+    // this commonte for test git commit
+    // this comment for test githubrepo
 }
