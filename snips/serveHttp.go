@@ -15,7 +15,7 @@ type (
     }
 )
 
-
+// testing
 
 func (s String) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "%s", s)
