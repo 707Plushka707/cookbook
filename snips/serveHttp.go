@@ -20,6 +20,8 @@ type (
 func (s String) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "%s", s)
 }
+
+// another testing
 func (s *Struct) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "%s%s %s", s.Greating, s.Punct, s.Who)
 }
