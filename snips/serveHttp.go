@@ -1,3 +1,5 @@
+// thanks gofragments.net
+
 package main
 import (
     "fmt"
