@@ -42,7 +42,7 @@ func main() {
         fmt.Println(book.Name)
         fmt.Println(book.Subject)
 
-        tmpl.Execute(w, struct{ Ok bool }{true})
+        tmpl.Execute(w, struct{Ok bool}{true})
 	})
 
 	http.ListenAndServe(":8080", nil)
