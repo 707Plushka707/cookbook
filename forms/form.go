@@ -17,7 +17,7 @@ type Book struct {
 
 func main() {
     session, err := mgo.Dial("localhost:27017")
-    CheckeErr("err in create session: ", err)
+    CheckeErr("err in create session: maybe mongodb not active", err)
 
     defer session.Close()
 
@@ -42,7 +42,7 @@ func main() {
         fmt.Println(book.Name)
         fmt.Println(book.Subject)
 
-		tmpl.Execute(w, struct{ Success bool }{true})
+        tmpl.Execute(w, struct{ Ok bool }{true})
 	})
 
 	http.ListenAndServe(":8080", nil)
@@ -51,7 +51,7 @@ func main() {
 
 func CheckeErr(str string, err error) {
     if err != nil {
-        fmt.Println(err)
+        fmt.Println(str, err)
         os.Exit(0)
     }
 }
