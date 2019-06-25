@@ -1,27 +1,27 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
-    "fmt"
-    "os"
+	"os"
 
-    "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2"
 )
 
 type Book struct {
-	Name   string
+	Name    string
 	Subject string
-	Author string
+	Author  string
 }
 
 func main() {
-    session, err := mgo.Dial("localhost:27017")
-    CheckeErr("err in create session: maybe mongodb not active", err)
+	session, err := mgo.Dial("localhost:27017")
+	CheckeErr("err in create session: maybe mongodb not active", err)
 
-    defer session.Close()
+	defer session.Close()
 
-    tmpl := template.Must(template.ParseFiles("asset/form.html"))
+	tmpl := template.Must(template.ParseFiles("asset/form.html"))
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
@@ -29,29 +29,28 @@ func main() {
 			return
 		}
 
-        c := session.DB("test").C("Book")
+		c := session.DB("test").C("Book")
 
 		book := Book{
-			Name:   r.FormValue("name"),
+			Name:    r.FormValue("name"),
 			Subject: r.FormValue("subject"),
-            Author: r.FormValue("author"),
+			Author:  r.FormValue("author"),
 		}
-        err = c.Insert(&Book{book.Name, book.Subject, book.Author})
+		err = c.Insert(&Book{book.Name, book.Subject, book.Author})
 
 		// do something with details
-        fmt.Println(book.Name)
-        fmt.Println(book.Subject)
+		fmt.Println(book.Name)
+		fmt.Println(book.Subject)
 
-        tmpl.Execute(w, struct{Ok bool}{true})
+		tmpl.Execute(w, struct{ Ok bool }{true})
 	})
 
 	http.ListenAndServe(":8080", nil)
 }
 
-
 func CheckeErr(str string, err error) {
-    if err != nil {
-        fmt.Println(str, err)
-        os.Exit(0)
-    }
+	if err != nil {
+		fmt.Println(str, err)
+		os.Exit(0)
+	}
 }
