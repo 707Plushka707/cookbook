@@ -10,9 +10,9 @@ import (
 )
 
 type Book struct {
-	Name   string
-	Subject string
-	Author string
+    Name   string
+    Subject string
+    Author string
 }
 
 func main() {
@@ -23,28 +23,27 @@ func main() {
 
     tmpl := template.Must(template.ParseFiles("asset/form.html"))
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			tmpl.Execute(w, nil)
-			return
-		}
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        if r.Method != http.MethodPost {
+	    tmpl.Execute(w, nil)
+	    return
+	}
 
         c := session.DB("test").C("Book")
 
-		book := Book{
-			Name:   r.FormValue("name"),
-			Subject: r.FormValue("subject"),
-            Author: r.FormValue("author"),
-		}
+	book := Book{
+		Name:   r.FormValue("name"),
+		Subject: r.FormValue("subject"),
+	        Author: r.FormValue("author"),
+	}
         err = c.Insert(&Book{book.Name, book.Subject, book.Author})
 
-		// do something with details
+	// do something with details
         fmt.Println(book.Name)
         fmt.Println(book.Subject)
 
         tmpl.Execute(w, struct{Ok bool}{true})
-	})
-
+	
 	http.ListenAndServe(":8080", nil)
 }
 
