@@ -11,6 +11,7 @@ type Person struct {
 }
 
 func main() {
+    fmt.Printf("%%")
     p := Person{Name: "admin", Age:"34"}
 
     // access to field in struct by point like this : {{.Feild}} 
