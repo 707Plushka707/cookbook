@@ -1,31 +1,18 @@
 package main
 
 import (
-<<<<<<< HEAD
 	"fmt"
 	"html/template"
 	"net/http"
 	"os"
-=======
-    "html/template"
-    "net/http"
-    "fmt"
-    "os"
->>>>>>> 3bd77332b2e755fc6ed6e36c775f0d23fbb7ab00
 
 	"gopkg.in/mgo.v2"
 )
 
 type Book struct {
-<<<<<<< HEAD
 	Name    string
 	Subject string
 	Author  string
-=======
-    Name   string
-    Subject string
-    Author string
->>>>>>> 3bd77332b2e755fc6ed6e36c775f0d23fbb7ab00
 }
 
 func main() {
@@ -44,7 +31,6 @@ func main() {
 
 		c := session.DB("test").C("Book")
 
-<<<<<<< HEAD
 		book := Book{
 			Name:    r.FormValue("name"),
 			Subject: r.FormValue("subject"),
@@ -59,21 +45,6 @@ func main() {
 		tmpl.Execute(w, struct{ Ok bool }{true})
 	})
 
-=======
-	book := Book{
-		Name:   r.FormValue("name"),
-		Subject: r.FormValue("subject"),
-	        Author: r.FormValue("author"),
-	}
-        err = c.Insert(&Book{book.Name, book.Subject, book.Author})
-
-	// do something with details
-        fmt.Println(book.Name)
-        fmt.Println(book.Subject)
-
-        tmpl.Execute(w, struct{Ok bool}{true})
-	
->>>>>>> 3bd77332b2e755fc6ed6e36c775f0d23fbb7ab00
 	http.ListenAndServe(":8080", nil)
 }
 
