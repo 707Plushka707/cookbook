@@ -3,11 +3,44 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"net/http"
 	"os"
-
-	"gopkg.in/mgo.v2"
+	// "gopkg.in/mgo.v2"
+    "github.com/gin-gonic/gin"
 )
+
+func getData(c *gin.Context) {
+		title := c.PostForm("title")
+		articl := c.PostForm("articl")
+
+        fmt.Printf("title is : %s,  articl is : %s", title, articl)
+	}
+    c.JSON(200, gin.H{title: articl})
+}
+
+func postData(c *gin.Context) {
+    c.JSON(200, gin.H{"postmsg": "posted hello world"})
+}
+
+
+func main() {
+    r := gin.Default()
+    r.GET("/", getData)
+    r.POST("/", postData)
+    r.Run()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 type Book struct {
 	Name    string
