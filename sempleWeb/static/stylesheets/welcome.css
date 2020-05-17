@@ -1,0 +1,20 @@
+body {
+    //max-height:100%;
+    //background-image: url("img_tree.gif"), url("paper.gif");
+    background-blend-mode: lighten;
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3));//url("/static/stylesheets/road.jpg"),
+    //background-blend-mode: overlay; 
+    //background-size:cover;
+
+}
+.welcome {
+    font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
+    font-size: 3rem;
+    color: aliceblue;
+}
+.senter {
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items:center
+}
