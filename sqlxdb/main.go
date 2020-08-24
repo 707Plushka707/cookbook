@@ -39,9 +39,9 @@ type Place struct {
 func main() {
 	// this Pings the database trying to connect, panics on error
 	// use sqlx.Open() for sql.Open() semantics
-	db, err := sqlx.Connect("mysql", "user=redora dbname=/ sslmode=disable")
+	db, err := sqlx.Connect("mysql", "user=root dbname=sooq/ sslmode=disable")
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalln("err is :", err)
 	}
 
 	// exec the schema or fail; multi-statement Exec behavior varies between
