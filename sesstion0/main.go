@@ -2,14 +2,16 @@ package main
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/gorilla/securecookie"
-	"net/http"
 )
 
 var cookieHandler = securecookie.New(
 	securecookie.GenerateRandomKey(64),
-	securecookie.GenerateRandomKey(32))
+	securecookie.GenerateRandomKey(32),
+)
 
 func getSession(request *http.Request) (yourName string) {
 	if cookie, err := request.Cookie("your-name"); err == nil {
