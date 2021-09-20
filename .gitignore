@@ -3,8 +3,8 @@
 
 # But not these files...
 !.gitignore
-!pubspec.yaml
-!lib
+!*/*/pubspec.yaml
+!*/*/lib
 # etc...
 
 # ...even if they are in subdirectories
