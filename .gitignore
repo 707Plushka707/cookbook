@@ -1,11 +1,11 @@
 # Ignore everything
-*
+# *
 
 # But not these files...
-#!.gitignore
-!*/*/pubspec.yaml
-!*/*/lib
-# etc...
+.gitignore
+*/*/android
+*/*/ios
+*/*/web
 
 # ...even if they are in subdirectories
 #!*/
