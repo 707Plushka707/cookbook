@@ -2,88 +2,52 @@ package main
 
 import (
 	"fmt"
-	"html/template"
-	"os"
+	"io"
+	"net/http"
+	"text/template"
+
 	// "gopkg.in/mgo.v2"
-    "github.com/gin-gonic/gin"
+	"github.com/labstack/echo/v4"
 )
 
-func getData(c *gin.Context) {
-		title := c.PostForm("title")
-		articl := c.PostForm("articl")
-
-        fmt.Printf("title is : %s,  articl is : %s", title, articl)
-	}
-    c.JSON(200, gin.H{title: articl})
+// template ============================
+type Template struct {
+	templates *template.Template
 }
 
-func postData(c *gin.Context) {
-    c.JSON(200, gin.H{"postmsg": "posted hello world"})
+func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+	return t.templates.ExecuteTemplate(w, name, data)
 }
 
-
-func main() {
-    r := gin.Default()
-    r.GET("/", getData)
-    r.POST("/", postData)
-    r.Run()
+var t = &Template{
+	templates: template.Must(template.ParseGlob("assets/form.html")),
 }
 
+// ===================================
+type User struct {
+	Title  string `json:"title" xml:"email" form:"email" query:"email"`
+	Articl string `json:"articl" xml:"name" form:"name" query:"name"`
+}
 
+func getData(c echo.Context) error {
 
+	return c.Render(http.StatusOK, "form.html", nil)
+}
 
+func postData(c echo.Context) error {
+	var u User
+	u.Title = c.FormValue("title")
+	u.Articl = c.FormValue("articl")
 
+	fmt.Printf("title is : %s,  articl is : %s", u.Title, u.Articl)
 
-
-
-
-
-
-
-
-
-type Book struct {
-	Name    string
-	Subject string
-	Author  string
+	return c.JSON(200, u)
 }
 
 func main() {
-	session, err := mgo.Dial("localhost:27017")
-	CheckeErr("err in create session: maybe mongodb not active", err)
-
-	defer session.Close()
-
-	tmpl := template.Must(template.ParseFiles("asset/form.html"))
-
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        if r.Method != http.MethodPost {
-	    tmpl.Execute(w, nil)
-	    return
-	}
-
-		c := session.DB("test").C("Book")
-
-		book := Book{
-			Name:    r.FormValue("name"),
-			Subject: r.FormValue("subject"),
-			Author:  r.FormValue("author"),
-		}
-		err = c.Insert(&Book{book.Name, book.Subject, book.Author})
-
-		// do something with details
-		fmt.Println(book.Name)
-		fmt.Println(book.Subject)
-
-		tmpl.Execute(w, struct{ Ok bool }{true})
-	})
-
-	http.ListenAndServe(":8080", nil)
-}
-
-func CheckeErr(str string, err error) {
-	if err != nil {
-		fmt.Println(str, err)
-		os.Exit(0)
-	}
+	e := echo.New()
+	e.Renderer = t
+	e.GET("/", getData)
+	e.POST("/", postData)
+	fmt.Println(e.Start(":8080"))
 }
