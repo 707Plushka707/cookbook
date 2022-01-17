@@ -2,6 +2,7 @@ package main
 
 import "github.com/webview/webview"
 
+// simple app
 func main() {
 	debug := false
 	w := webview.New(debug)
