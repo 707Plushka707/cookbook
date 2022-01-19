@@ -3,33 +3,30 @@
 <body>
 
 <p>My first paragraph.</p>
- <iframe src="https://micro-editor.github.io/" title="W3Schools Free Online Web Tutorials"></iframe> 
+<div id="demo">
+<iframe  src="https://micro-editor.github.io/" title="W3Schools Free Online Web Tutorials"></iframe> 
+</div>
 
- <style>
-iframe {
-    width: 100%;
-    height: 400px;
-}
-</style>
+<button type="button" onclick='document.getElementById("demo").innerHTML += "<iframe src=https://micro-editor.github.io/ title=W3></iframe>"'>Click Me!</button>
+
+
 
 <script>
 
-const urls = [
-"https://github.com/Jacobious52/Dusk-lang",
-"https://stackoverflow.com/questions/70735919/using-%d1%81pp-sources-in-the-golang-library",
-"https://www.reddit.com/r/golang/comments/4aj6xr/is_it_possible_to_write_a_basic_web_browser_in_go/",
-"https://golang.hotexamples.com/examples/c/-/cef_browser_host_create_browser/golang-cef_browser_host_create_browser-function-examples.html",
-"https://github.com/Tim-Paik/webview2/blob/master/cmd/demo/main.go",
-"https://www.w3schools.com/tags/tag_iframe.asp",
-"https://www.w3schools.com/html/html_basic.asp"
-];
-var frm
-for (let i = 0; i< urls.length; i++) {
-     frm = document.createElement("iframe");
-    frm.src = urls[i]
-    document.body.appendChild(frm);
-}
+const urls = "https://golang.hotexamples.com/examples/c/-/cef_browser_host_create_browser/golang-cef_browser_host_create_browser-function-examples.html",
+
 </script>
+
+
+
+
+<style>
+iframe {
+    width: 100%;
+    height: 100%;
+}
+</style>
+
 
 </body>
 </html> 
