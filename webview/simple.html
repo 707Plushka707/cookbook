@@ -1,32 +1,43 @@
- <!DOCTYPE html>
-<html>
-<body>
+<!DOCTYPE html>
+<html window-frame="extended" window-blurebehind="dark" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HTML5 Example Page</title>
 
-<p>My first paragraph.</p>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="WebView">
+
+<body>
+    <h1>web view app</h1>
 <div id="demo">
+
 <iframe  src="https://micro-editor.github.io/" title="W3Schools Free Online Web Tutorials"></iframe> 
 </div>
 
-<button type="button" onclick='document.getElementById("demo").innerHTML += "<iframe src=https://micro-editor.github.io/ title=W3></iframe>"'>Click Me!</button>
-
-
-
-<script>
-
-const urls = "https://golang.hotexamples.com/examples/c/-/cef_browser_host_create_browser/golang-cef_browser_host_create_browser-function-examples.html",
-
-</script>
-
-
-
+<button type="button" onclick='toggle()'>Click Me!</button>
 
 <style>
+html {
+    background-color: rgba(0, 100, 100,0.1);
+}
 iframe {
     width: 100%;
-    height: 100%;
+    height: 400px;
 }
 </style>
+<script>
+var clecked = false
+function toggle() {
+        if (!clecked) {
+                document.getElementById("demo").innerHTML = "<iframe src=https://bashery.github.io/ title=W3></iframe>";
+                clecked = true;
+        } else {
+                document.getElementById("demo").innerHTML = "<iframe src=https://micro-editor.github.io/ title=W3></iframe>";
+                clecked = false; 
+        }
+}
 
+</script>
 
 </body>
 </html> 
